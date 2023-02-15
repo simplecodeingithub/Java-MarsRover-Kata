@@ -4,7 +4,6 @@ public class Rover {
     private int xCordinate;
     private int yCordinate;
     private char direction;
-    //private Plateau plateau;
 
     public Rover(int xCordinate, int yCordinate, char direction) {
         this.xCordinate = xCordinate;
@@ -112,8 +111,7 @@ public class Rover {
       // Getter method to retrieve the current position and direction of the rover
     public String getPosition(){
         return String.format("%d %d %c",xCordinate,yCordinate,direction);
-        //return xCordinate + " " + yCordinate + " " + direction;
-      }
+    }
 }
 
 

@@ -2,8 +2,7 @@ package com.techreturners;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
   @Test
@@ -97,5 +96,27 @@ public class MarsRoverTest {
      assertEquals("Invalid command:Q",e.getMessage());
    }
  }
-
+ @Test
+    public void testOverlap(){
+     Plateau plateau=new Plateau(5,5);
+     Rover rover1=new Rover(1,1,'N');
+     Rover rover2=new Rover(2,2,'N');
+     plateau.addRover(rover1);
+     plateau.addRover(rover2);
+     boolean overlap1=plateau.roversOverlap(rover1,rover2);
+     //assertEquals("true",overlap1);
+     assertTrue(overlap1);
+ }
+ @Test
+    public void testOverlap_with_samePosition(){
+     Plateau plateau=new Plateau(5,5);
+     Rover rover1=new Rover(1,2,'N');
+     Rover rover2=new Rover(1,2,'E');
+     plateau.addRover(rover1);
+     plateau.addRover(rover2);
+     //check for overlap
+     boolean overlap1=plateau.roversOverlap(rover1,rover2);
+     //assertEquals("true",overlap1);
+     assertTrue(overlap1);
+ }
 }

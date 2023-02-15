@@ -54,15 +54,23 @@ public class Plateau {
         return true;
     }
 
-    public boolean overlaps(Plateau otherOne){
-        if(otherOne==null){
-            throw new IllegalArgumentException("cannot check for overlap with null plateau");
+    public boolean roversOverlap(Rover rover1, Rover rover2) {
+        if (rover1 == null || rover2 == null) {
+            throw new IllegalArgumentException("Cannot check for overlap with a null Rover");
         }
-        int otherXmax=otherOne.getWidth();
-        int otherYmax=otherOne.getHeight();
-        if(this.width<otherXmax || this.height<otherYmax || otherOne.getWidth()<0 || otherOne.getHeight()<0){
+        if (rover1.equals(rover2)) {
+            // Rovers cannot overlap with themselves
             return false;
         }
+        if (rover1.getxCordinate() > rover2.getxCordinate() + 1 || rover2.getxCordinate() > rover1.getxCordinate() + 1) {
+            // Rovers are not horizontally aligned
+            return false;
+        }
+        if (rover1.getyCordinate() > rover2.getyCordinate() + 1 || rover2.getyCordinate() > rover1.getyCordinate() + 1) {
+            // Rovers are not vertically aligned
+            return false;
+        }
+        // Rovers overlap
         return true;
     }
 }
