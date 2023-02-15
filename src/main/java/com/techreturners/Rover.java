@@ -7,13 +7,9 @@ public class Rover {
     //private Plateau plateau;
 
     public Rover(int xCordinate, int yCordinate, char direction) {
-        /*if(!plateau.withinBounds(xCordinate,yCordinate)){
-            throw new IllegalArgumentException("Rover is out of bounds of the plateau");
-        }*/
         this.xCordinate = xCordinate;
         this.yCordinate = yCordinate;
         this.direction = direction;
-       // this.plateau=plateau;
     }
 
     public int getxCordinate() {

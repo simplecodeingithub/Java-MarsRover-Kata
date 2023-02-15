@@ -7,25 +7,39 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class MarsRoverTest {
   @Test
-  public void testMoveForward() {
-    Plateau plateau = new Plateau(5, 5);
-    Rover rover1 = new Rover(1, 2, 'N');
-    plateau.addRover(rover1);
-    rover1.move("LMLMLMLMM");
-    assertEquals("1 3 N", rover1.getPosition());
-    System.out.println("The final position is :" + rover1.getPosition());
+  public void testMoveForward_with_Single_Command() {
+      Plateau plateau = new Plateau(5, 5);
+      //adding rover1 to plateau to check movements with single command
+      Rover rover1 = new Rover(3, 3, 'N');
+      plateau.addRover(rover1);
+      rover1.move("M");
+      assertEquals("3 4 N", rover1.getPosition());
+      System.out.println("The final position is :" + rover1.getPosition());
+  }
 
-    Rover rover2 = new Rover(3, 3, 'E');
-    plateau.addRover(rover2);
-    rover2.move("MMRMMRMRRM");
-    assertEquals("5 1 E", rover2.getPosition());
-    System.out.println("The final position is :" + rover2.getPosition());
+   @Test
+   public void testMoveForward_with_MultipleCommands() {
+       Plateau plateau = new Plateau(5, 5);
+       Rover rover2 = new Rover(1, 2, 'N');
+       plateau.addRover(rover2);
+       rover2.move("LMLMLMLMM");
+       assertEquals("1 3 N", rover2.getPosition());
+       System.out.println("The final position is :" + rover2.getPosition());
+   }
+    @Test
+    public void testMoveForward_oneRoverWithDiffInput() {
+      Plateau plateau = new Plateau(5, 5);
+      Rover rover3 = new Rover(3, 3, 'E');
+      plateau.addRover(rover3);
+      rover3.move("MMRMMRMRRM");
+      assertEquals("5 1 E", rover3.getPosition());
+      System.out.println("The final position is :" + rover3.getPosition());
   }
 
   @Test
   public void testMoveOutOfPlateau() {
     Plateau plateau = new Plateau(5, 5);
-    //we move rover1 forward 5 units to the tope of plateau,valid move
+    //we move rover1 forward 5 units to the top of plateau,valid move
     Rover rover1 = new Rover(0, 0, 'N');
     plateau.addRover(rover1);
     rover1.move("MMMMM");
@@ -72,5 +86,16 @@ public class MarsRoverTest {
     plateau.removeRover(rover1);
     assertEquals(1,plateau.getRovers().size());
   }
+ @Test
+  public void testInvalidCommnad(){
+   Plateau plateau=new Plateau(5,5);
+   Rover rover1=new Rover(1,2,'N');
+   plateau.addRover(rover1);
+   try {
+     rover1.move("QT");
+   }catch (IllegalArgumentException e){
+     assertEquals("Invalid command:Q",e.getMessage());
+   }
+ }
 
 }
