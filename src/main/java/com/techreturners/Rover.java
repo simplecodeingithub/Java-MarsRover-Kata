@@ -4,6 +4,7 @@ public class Rover {
     private int xCordinate;
     private int yCordinate;
     private char direction;
+    private Plateau plateau;
 
     public Rover(int xCordinate, int yCordinate, char direction) {
         this.xCordinate = xCordinate;
@@ -47,7 +48,7 @@ public class Rover {
                 case 'M':
                     moveForward();
                     break;
-                default:
+                    default:
                     throw new IllegalArgumentException("Invalid command:" + command);
             }
     }
@@ -106,7 +107,10 @@ public class Rover {
                   throw new IllegalArgumentException("Invalid command:" + direction);
           }
       }
-      public String toString(){
+
+
+      // Getter method to retrieve the current position and direction of the rover
+    public String getPosition(){
         return xCordinate + " " + yCordinate + " " + direction;
       }
 }
@@ -114,54 +118,3 @@ public class Rover {
 
 
 
-            /*case 'M':
-                switch (direction) {
-                    case 'N':
-                        yCordinate++;
-                        break;
-                    case 'E':
-                        xCordinate++;
-                        break;
-                    case 'S':
-                        yCordinate--;
-                        break;
-                    case 'W':
-                        xCordinate--;
-                        break;
-                }
-                break;
-            case 'L':
-                switch (direction) {
-                    case 'N':
-                        direction='W';
-                        break;
-                    case 'E':
-                        direction='N';
-                        break;
-                    case 'S':
-                        direction='E';
-                        break;
-                    case 'W':
-                        direction='S';
-                        break;
-                }
-                break;
-            case 'R':
-                switch (direction) {
-                    case 'N':
-                        direction='E';
-                        break;
-                    case 'E':
-                        direction='S';
-                        break;
-                    case 'S':
-                        direction='W';
-                        break;
-                    case 'W':
-                        direction='N';
-                        break;
-                }
-                break;
-        }
-    }
-}*/
