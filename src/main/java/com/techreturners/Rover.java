@@ -4,12 +4,16 @@ public class Rover {
     private int xCordinate;
     private int yCordinate;
     private char direction;
-    private Plateau plateau;
+    //private Plateau plateau;
 
     public Rover(int xCordinate, int yCordinate, char direction) {
+        /*if(!plateau.withinBounds(xCordinate,yCordinate)){
+            throw new IllegalArgumentException("Rover is out of bounds of the plateau");
+        }*/
         this.xCordinate = xCordinate;
         this.yCordinate = yCordinate;
         this.direction = direction;
+       // this.plateau=plateau;
     }
 
     public int getxCordinate() {
@@ -111,7 +115,8 @@ public class Rover {
 
       // Getter method to retrieve the current position and direction of the rover
     public String getPosition(){
-        return xCordinate + " " + yCordinate + " " + direction;
+        return String.format("%d %d %c",xCordinate,yCordinate,direction);
+        //return xCordinate + " " + yCordinate + " " + direction;
       }
 }
 
