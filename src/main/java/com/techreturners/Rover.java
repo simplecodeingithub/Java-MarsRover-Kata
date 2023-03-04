@@ -1,11 +1,13 @@
 package com.techreturners;
 
-public class Rover {
+import javax.swing.text.Position;
+
+public class Rover implements LunarVehicle{
     private int xCordinate;
     private int yCordinate;
-    private char direction;
+    private Direction direction;
 
-    public Rover(int xCordinate, int yCordinate, char direction) {
+    public Rover(int xCordinate, int yCordinate, Direction direction) {
         this.xCordinate = xCordinate;
         this.yCordinate = yCordinate;
         this.direction = direction;
@@ -15,44 +17,44 @@ public class Rover {
         return xCordinate;
     }
 
-    public void setxCordinate(int xCordinate) {
-        this.xCordinate = xCordinate;
-    }
-
     public int getyCordinate() {
         return yCordinate;
     }
 
-    public void setyCordinate(int yCordinate) {
-        this.yCordinate = yCordinate;
-    }
-
-    public char getDirection() {
+    public Direction getDirection() {
         return direction;
     }
-
-    public void setDirection(char direction) {
-        this.direction = direction;
+    public void turnLeft(){
+        direction=direction.turnLeft();
+    }
+    public void turnRight(){
+        direction=direction.turnRight();
     }
 
-    public void move(String commands) {
-        for (char command : commands.toCharArray())
-            switch (command) {
-                case 'L':
-                    turnLeft();
-                    break;
-                case 'R':
-                    turnRight();
-                    break;
-                case 'M':
-                    moveForward();
-                    break;
+    public void move() {
+        switch (direction) {
+            case N:
+                yCordinate++;
+                break;
+            case E:
+                xCordinate++;
+                break;
+            case S:
+                yCordinate--;
+                break;
+            case W:
+                xCordinate--;
+                break;
                     default:
-                    throw new IllegalArgumentException("Invalid command:" + command);
+                    throw new IllegalArgumentException("Invalid command:" + direction);
             }
-    }
 
-    private void turnLeft(){
+    }
+ public void setCoordinates(int x,int y){
+        this.xCordinate=x+1;
+        this.yCordinate=y+1;
+ }
+    /*void turnLeft(){
         switch (direction) {
             case 'N':
                 direction='W';
@@ -70,7 +72,7 @@ public class Rover {
                 throw new IllegalArgumentException("Invalid command:" + direction);
         }
     }
-     private void turnRight(){
+     void turnRight(){
          switch (direction) {
              case 'N':
                  direction='E';
@@ -88,8 +90,9 @@ public class Rover {
                  throw new IllegalArgumentException("Invalid command:" + direction);
          }
      }
-      private void moveForward(){
-          switch (direction) {
+
+     private void moveForward() {
+        switch (direction) {
               case 'N':
                   yCordinate++;
                   break;
@@ -105,12 +108,23 @@ public class Rover {
               default:
                   throw new IllegalArgumentException("Invalid command:" + direction);
           }
-      }
+    }*/
 
-
-      // Getter method to retrieve the current position and direction of the rover
+    // Getter method to retrieve the current position and direction of the rover
     public String getPosition(){
         return String.format("%d %d %c",xCordinate,yCordinate,direction);
+    }
+
+    public void setxCordinate(int xCordinate) {
+        this.xCordinate = xCordinate;
+    }
+
+    public void setyCordinate(int yCordinate) {
+        this.yCordinate = yCordinate;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }
 

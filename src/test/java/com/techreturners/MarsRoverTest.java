@@ -1,11 +1,40 @@
 package com.techreturners;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
-  @Test
+    @ParameterizedTest
+    @CsvFileSource(resources = "/rover-movement.csv", numLinesToSkip = 1)
+
+    public void testMoveRover(int width,int height,int startX,int startY,String startDirection,String instructions,boolean valid,int endX,int endY,String endDirection){
+        Plateau plateau=new Plateau(width, height);
+        MissionControl missionControl=new MissionControl(plateau);
+        Rover rover=new Rover(startX,startY,Direction.valueOf(startDirection));
+
+        if (valid) {
+            missionControl.addRover(rover);
+            boolean moveSuccessful = missionControl.moveRover(rover, instructions);
+            assertTrue(moveSuccessful);
+            assertEquals(endX, rover.getxCordinate());
+            assertEquals(endY, rover.getyCordinate());
+            assertEquals(Direction.valueOf(endDirection), rover.getDirection());
+        } else {
+           IllegalArgumentException exception= assertThrows(IllegalArgumentException.class, () ->{
+                missionControl.addRover(rover);
+                missionControl.moveRover(rover,instructions);
+                //assertEquals(expectedExceptionMessgae,exception.getMessage());
+            },"Rover cannot move outside Plateau boundaries");
+
+        }
+    }
+
+}
+
+  /*@Test
   public void testMoveForward_with_Single_Command() {
       Plateau plateau = new Plateau(5, 5);
       //adding rover1 to plateau to check movements with single command
@@ -120,3 +149,4 @@ public class MarsRoverTest {
      assertTrue(overlap1);
  }
 }
+*/
